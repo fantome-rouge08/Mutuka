@@ -236,4 +236,28 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         });
     }
+
+    // 8. Interception des boutons de publication / vente / location pour les non-connectés
+    if (typeof window.MUTUKA_IS_AUTH !== "undefined" && !window.MUTUKA_IS_AUTH) {
+        const authModal = document.getElementById("modal-auth-required");
+        const publishLinks = document.querySelectorAll('a[href*="publier.php"], [data-require-auth]');
+
+        if (authModal && publishLinks.length > 0) {
+            publishLinks.forEach((link) => {
+                link.addEventListener("click", (e) => {
+                    e.preventDefault();
+                    authModal.classList.add("open");
+                    authModal.setAttribute("aria-hidden", "false");
+                });
+            });
+
+            // Fermeture avec touche Echap
+            document.addEventListener("keydown", (e) => {
+                if (e.key === "Escape" && authModal.classList.contains("open")) {
+                    authModal.classList.remove("open");
+                    authModal.setAttribute("aria-hidden", "true");
+                }
+            });
+        }
+    }
 });

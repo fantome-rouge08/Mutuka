@@ -7,7 +7,7 @@ require_once __DIR__ . '/includes/helpers.php';
 require_once __DIR__ . '/config/database.php';
 
 // Exiger d'être connecté pour publier
-requireAuth('publier.php');
+requireAuth('publier.php', 'inscription.php', 'Vous devez créer un compte (ou vous connecter) avant de pouvoir publier une annonce ou vendre votre véhicule.');
 $currentUser = getCurrentUser();
 
 $errors = [];

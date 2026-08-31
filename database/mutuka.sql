@@ -1,10 +1,3 @@
--- =====================================================================
--- MUTUKA.COM — Base de données MySQL
--- =====================================================================
-
-CREATE DATABASE IF NOT EXISTS `mutuka_db` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-USE `mutuka_db`;
-
 -- Table des utilisateurs
 CREATE TABLE IF NOT EXISTS `users` (
     `id` INT AUTO_INCREMENT PRIMARY KEY,

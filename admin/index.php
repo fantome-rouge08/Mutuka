@@ -6,7 +6,7 @@
 require_once __DIR__ . '/../includes/helpers.php';
 require_once __DIR__ . '/../config/database.php';
 
-requireAuth('admin/index.php');
+requireAuth('admin/index.php', 'connexion.php', 'Accès réservé aux administrateurs. Veuillez vous connecter.');
 $currentUser = getCurrentUser();
 
 // Statistiques globales

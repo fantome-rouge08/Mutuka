@@ -1,16 +1,11 @@
 <?php
-/**
- * config/database.php
- * Connexion à la base de données MySQL via PDO avec gestion automatique
- * de l'initialisation des tables et des données de démonstration.
- */
 
 if (!defined('DB_HOST')) {
-    define('DB_HOST', '127.0.0.1');
+    define('DB_HOST', 'sql313.infinityfree.com');
     define('DB_PORT', '3306');
-    define('DB_NAME', 'mutuka_db');
-    define('DB_USER', 'root');
-    define('DB_PASS', 'michel');
+    define('DB_NAME', 'if0_42775047_mutuka');
+    define('DB_USER', 'if0_42775047');
+    define('DB_PASS', 'mutuka64');
 }
 
 /**
@@ -34,10 +29,6 @@ function getPDO(): PDO {
     try {
         $dsnServer = "mysql:host=" . DB_HOST . ";port=" . DB_PORT . ";charset=utf8mb4";
         $tempPdo = new PDO($dsnServer, DB_USER, DB_PASS, $options);
-        
-        // Créer la base de données si elle n'existe pas
-        $tempPdo->exec("CREATE DATABASE IF NOT EXISTS `" . DB_NAME . "` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci");
-        $tempPdo = null;
 
         // Connexion à la base de données
         $dsn = "mysql:host=" . DB_HOST . ";port=" . DB_PORT . ";dbname=" . DB_NAME . ";charset=utf8mb4";
@@ -51,7 +42,7 @@ function getPDO(): PDO {
         try {
             $dsnServer = "mysql:host=" . DB_HOST . ";port=3307;charset=utf8mb4";
             $tempPdo = new PDO($dsnServer, DB_USER, DB_PASS, $options);
-            $tempPdo->exec("CREATE DATABASE IF NOT EXISTS `" . DB_NAME . "` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci");
+            // $tempPdo->exec("CREATE DATABASE IF NOT EXISTS `" . DB_NAME . "` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci");
             $tempPdo = null;
 
             $dsn = "mysql:host=" . DB_HOST . ";port=3307;dbname=" . DB_NAME . ";charset=utf8mb4";
@@ -162,13 +153,13 @@ function initDatabaseIfNeeded(PDO $pdo): void {
     ]);
     $v5 = $pdo->lastInsertId();
 
-    // 6. Suzuki Jimny AllGrip 4x4 - LOCATION
+    // 6. Mercedes ML 350 - LOCATION
     $stmtVeh->execute([
         $user2Id, 'location', 'voiture',
-        'Suzuki Jimny AllGrip Compact 4x4',
-        'Suzuki', 'Jimny', 2022, 28000, 'essence', 'manuelle', 'Kaki Safari', 4,
+        'Mercedes ML 350',
+        'Mercedes', 'ML', 2011, 30000, 'essence', 'automatique', 'Kaki Safari', 4,
         50.00, 150.00, 'Goma', 'Boulevard Kanyamuhanga',
-        'Le petit 4x4 passe-partout agile et économique. Idéal pour explorer la région en toute sérénité. Climatisation, Bluetooth, transmission intégrale débrayable.',
+        'Le vehicule agile et économique. Idéal pour explorer la région en toute sérénité. Climatisation, Bluetooth, transmission intégrale débrayable.',
         'disponible', 74
     ]);
     $v6 = $pdo->lastInsertId();

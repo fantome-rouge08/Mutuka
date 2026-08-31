@@ -43,7 +43,7 @@ $isOwner = ($currentUser && $currentUser['id'] == $vehicle['owner_id']);
 
 // Traitement des requêtes POST (Achat / Réservation de location)
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    requireAuth("details.php?id={$id}");
+    requireAuth("details.php?id={$id}", 'connexion.php', 'Vous devez être connecté pour effectuer une demande d\'achat ou de location.');
     $action = $_POST['action'] ?? '';
 
     if ($action === 'achat') {
@@ -272,9 +272,12 @@ require_once __DIR__ . '/includes/header.php';
 
                 <!-- Bouton d'action sécurisé (Acheter ou Réserver) -->
                 <?php if ($isOwner): ?>
-                    <div style="background: var(--surface-alt); padding: var(--space-3); border-radius: var(--radius-sm); text-align: center; font-size: 0.88rem; border: 1px solid var(--border);">
-                        👤 <strong>Vous êtes le propriétaire de cette annonce.</strong><br>
-                        <a href="<?php echo url('compte/index.php#annonces'); ?>" style="color: var(--accent-dark); font-weight: 600; text-decoration: underline;">Gérer vos annonces</a>
+                    <div style="background: var(--surface-alt); padding: var(--space-4); border-radius: var(--radius-sm); text-align: center; font-size: 0.88rem; border: 1px solid var(--border);">
+                        <div style="margin-bottom: 8px;">👤 <strong>Vous êtes l'auteur de cette annonce.</strong></div>
+                        <div style="display: flex; gap: 8px; justify-content: center; flex-wrap: wrap;">
+                            <a href="<?php echo url("modifier.php?id={$vehicle['id']}"); ?>" class="btn btn-accent btn-sm">✏️ Modifier l'annonce</a>
+                            <a href="<?php echo url('compte/index.php#annonces'); ?>" class="btn btn-outline btn-sm">Mes annonces</a>
+                        </div>
                     </div>
                 <?php elseif ($vehicle['statut'] !== 'disponible'): ?>
                     <div style="background: var(--warning-bg); color: var(--warning); padding: var(--space-3); border-radius: var(--radius-sm); text-align: center; font-size: 0.9rem; font-weight: 600;">

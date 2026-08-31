@@ -50,12 +50,12 @@ function getCurrentUser(): ?array {
 /**
  * Exige une authentification pour accéder à la page
  */
-function requireAuth(string $redirectUrl = 'connexion.php'): void {
+function requireAuth(string $redirectTarget = '', string $loginUrl = 'connexion.php', string $message = 'Vous devez être connecté pour accéder à cette page.'): void {
     if (!isLoggedIn()) {
-        setFlash('warning', 'Vous devez être connecté pour accéder à cette page.');
-        $currentUri = $_SERVER['REQUEST_URI'] ?? '';
+        setFlash('warning', $message);
+        $currentUri = !empty($redirectTarget) ? url($redirectTarget) : ($_SERVER['REQUEST_URI'] ?? '');
         $_SESSION['redirect_after_login'] = $currentUri;
-        header('Location: ' . url($redirectUrl));
+        header('Location: ' . url($loginUrl));
         exit;
     }
 }

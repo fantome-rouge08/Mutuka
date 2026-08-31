@@ -34,6 +34,8 @@ $currentScript = basename($_SERVER['SCRIPT_NAME']);
                 document.documentElement.setAttribute('data-theme', 'light');
             }
         })();
+        window.MUTUKA_IS_AUTH = <?php echo $isAuth ? 'true' : 'false'; ?>;
+        window.MUTUKA_BASE_URL = "<?php echo getBaseUrl(); ?>";
     </script>
 
     <!-- Police simple, moderne et épurée -->

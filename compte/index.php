@@ -7,7 +7,7 @@
 require_once __DIR__ . '/../includes/helpers.php';
 require_once __DIR__ . '/../config/database.php';
 
-requireAuth('compte/index.php');
+requireAuth('compte/index.php', 'connexion.php', 'Vous devez être connecté pour accéder à votre espace compte.');
 $currentUser = getCurrentUser();
 $userId = $currentUser['id'];
 
@@ -286,6 +286,7 @@ require_once __DIR__ . '/../includes/header.php';
                                 </form>
 
                                 <div style="display: flex; gap: 6px;">
+                                    <a href="<?php echo url("modifier.php?id={$v['id']}"); ?>" class="btn btn-accent btn-sm">Modifier</a>
                                     <a href="<?php echo url("details.php?id={$v['id']}"); ?>" class="btn btn-outline btn-sm">Voir</a>
                                     <form action="<?php echo url('compte/index.php'); ?>" method="post" onsubmit="return confirm('Confirmez-vous la suppression de cette annonce ?');">
                                         <input type="hidden" name="action" value="delete_vehicle" />
