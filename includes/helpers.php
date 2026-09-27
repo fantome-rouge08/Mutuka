@@ -157,16 +157,6 @@ function findAssetPhotoForTitle(?string $title): ?string {
         return 'assets/Hyundai_Tucson.jpg';
     }
 
-    // 6. Mercedes ML / autre Mercedes
-    if (str_contains($titleLower, 'ml') || str_contains($titleLower, 'mercedes')) {
-        return 'assets/Mercedes_ML350.jpg';
-    }
-
-    // 7. Jimny / Suzuki
-    if (str_contains($titleLower, 'jimny') || str_contains($titleLower, 'suzuki')) {
-        return 'assets/Mercedes_ML350.jpg';
-    }
-
     return null;
 }
 
@@ -188,44 +178,33 @@ function getVehiclePhoto(?string $photoUrl, string $type = 'voiture', ?string $t
         if (file_exists(__DIR__ . '/../' . $cleanPath) && !is_dir(__DIR__ . '/../' . $cleanPath)) {
             return url($cleanPath);
         }
+
+        // Tolérance : vérifier dans uploads/vehicules si le chemin contient uploads/vehicles (ou inversement)
+        $altPath1 = str_replace('uploads/vehicles/', 'uploads/vehicules/', $cleanPath);
+        if (file_exists(__DIR__ . '/../' . $altPath1) && !is_dir(__DIR__ . '/../' . $altPath1)) {
+            return url($altPath1);
+        }
+        $altPath2 = str_replace('uploads/vehicules/', 'uploads/vehicles/', $cleanPath);
+        if (file_exists(__DIR__ . '/../' . $altPath2) && !is_dir(__DIR__ . '/../' . $altPath2)) {
+            return url($altPath2);
+        }
+
+        // Si c'est un nom d'asset directement
+        if (file_exists(__DIR__ . '/../assets/' . basename($cleanPath))) {
+            return url('assets/' . basename($cleanPath));
+        }
+    }
+
+    // 3. Image de secours locale si disponible dans assets/
+    if (file_exists(__DIR__ . '/../assets/Toyota_Land_Cruiser2022.jpg')) {
+        return url('assets/Toyota_Land_Cruiser2022.jpg');
     }
     
-    // 3. Génère un placeholder SVG dynamique et esthétique selon le type
-    return generateCarPlaceholderSvgUrl($type);
+    // 4. Génère un placeholder SVG dynamique si aucune image physique
+    $svg = '<svg xmlns="http://www.w3.org/2000/svg" width="600" height="400" viewBox="0 0 600 400"><rect width="100%" height="100%" fill="#e2e8f0"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="22" fill="#64748b">Mutuka.com</text></svg>';
+    return 'data:image/svg+xml;charset=utf-8,' . rawurlencode($svg);
 }
 
-/**
- * Génère une URL Data SVG élégante pour représenter un véhicule sans photo
- */
-function generateCarPlaceholderSvgUrl(string $type = 'voiture'): string {
-    $color = '#202327';
-    $accent = '#A9814A';
-    $title = strtoupper($type);
-    
-    $svg = '<svg xmlns="http://www.w3.org/2000/svg" width="600" height="400" viewBox="0 0 600 400" style="background:linear-gradient(135deg, #1e2024 0%, #15171a 100%);">
-        <defs>
-            <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#32363c" />
-                <stop offset="100%" stop-color="#1b1d20" />
-            </linearGradient>
-        </defs>
-        <rect width="600" height="400" fill="url(#grad)" />
-        <g transform="translate(130, 100)" stroke="' . $accent . '" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M20 120 C20 90 45 70 80 68 L115 48 C130 38 145 34 165 34 L240 34 C255 34 270 42 280 55 L300 78 L330 84 C342 86 350 96 350 108 L350 120 L320 120" />
-            <path d="M20 120 L20 110 C20 105 25 102 30 102 L320 102 C328 102 335 106 340 112 L350 120" />
-            <line x1="115" y1="102" x2="125" y2="55" opacity="0.6"/>
-            <line x1="180" y1="102" x2="180" y2="38" opacity="0.6"/>
-            <circle cx="85" cy="122" r="24" stroke="' . $accent . '" fill="#15171a"/>
-            <circle cx="85" cy="122" r="8" fill="' . $accent . '"/>
-            <circle cx="280" cy="122" r="24" stroke="' . $accent . '" fill="#15171a"/>
-            <circle cx="280" cy="122" r="8" fill="' . $accent . '"/>
-        </g>
-        <text x="300" y="300" text-anchor="middle" fill="#FFFFFF" font-family="sans-serif" font-size="16" font-weight="600" letter-spacing="3" opacity="0.85">MUTUKA • ' . htmlspecialchars($title) . '</text>
-        <text x="300" y="325" text-anchor="middle" fill="' . $accent . '" font-family="sans-serif" font-size="12" letter-spacing="1.5">VÉHICULE CERTIFIÉ</text>
-    </svg>';
-
-    return 'data:image/svg+xml;utf8,' . rawurlencode($svg);
-}
 
 /**
  * Traitement sécurisé de l'upload de photo d'un véhicule

@@ -1,1 +1,0 @@
-Ce dossier recevra les photos uploadées des annonces (à partir de l'étape 6).

@@ -89,7 +89,10 @@ $currentScript = basename($_SERVER['SCRIPT_NAME']);
                 </div>
             <?php endif; ?>
 
-            <a href="<?php echo url('publier.php'); ?>" class="btn btn-accent">+ Publier une annonce</a>
+            <a href="<?php echo url('publier.php'); ?>" class="btn btn-accent header-publish-btn">
+                <span class="btn-text-full">+ Publier une annonce</span>
+                <span class="btn-text-short">+ Publier</span>
+            </a>
             
             <button class="burger" id="burger" aria-label="Ouvrir le menu" aria-expanded="false">
                 <span></span><span></span><span></span>

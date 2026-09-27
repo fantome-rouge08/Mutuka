@@ -55,6 +55,14 @@ document.addEventListener("DOMContentLoaded", () => {
                 burger.setAttribute("aria-expanded", "false");
             });
         });
+
+        // Fermeture si clic à l'extérieur
+        document.addEventListener("click", (e) => {
+            if (mobileNav.classList.contains("open") && !mobileNav.contains(e.target) && !burger.contains(e.target)) {
+                mobileNav.classList.remove("open");
+                burger.setAttribute("aria-expanded", "false");
+            }
+        });
     }
 
     // 2. Galerie photo détails (vignettes cliquables)
@@ -151,6 +159,13 @@ document.addEventListener("DOMContentLoaded", () => {
     // 5. Onglets de l'espace « Mon compte »
     const tabLinks = document.querySelectorAll(".tab-link");
     const tabContents = document.querySelectorAll(".tab-content");
+    const tabsNav = document.getElementById("dashboardTabsNav");
+
+    function centerActiveTab(tabElement) {
+        if (!tabElement || !tabsNav) return;
+        const scrollLeft = tabElement.offsetLeft - (tabsNav.clientWidth / 2) + (tabElement.clientWidth / 2);
+        tabsNav.scrollTo({ left: scrollLeft, behavior: "smooth" });
+    }
 
     if (tabLinks.length > 0 && tabContents.length > 0) {
         const currentHash = window.location.hash.replace("#", "");
@@ -165,6 +180,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 const targetContent = document.getElementById(`tab-${tabTarget}`);
                 if (targetContent) targetContent.classList.add("active");
                 activeTabFound = true;
+                setTimeout(() => centerActiveTab(link), 100);
             }
 
             link.addEventListener("click", () => {
@@ -178,12 +194,25 @@ document.addEventListener("DOMContentLoaded", () => {
                     targetContent.classList.add("active");
                     window.location.hash = targetId;
                 }
+                centerActiveTab(link);
+
+                // Sur mobile, repositionner doucement l'écran en haut du contenu si l'utilisateur a défilé plus bas
+                if (window.innerWidth <= 860) {
+                    const mainContent = document.getElementById("dashboard-content");
+                    if (mainContent) {
+                        const targetOffset = mainContent.getBoundingClientRect().top + window.scrollY - 130;
+                        if (window.scrollY > targetOffset) {
+                            window.scrollTo({ top: targetOffset, behavior: "smooth" });
+                        }
+                    }
+                }
             });
         });
 
         if (!activeTabFound && tabLinks[0]) {
             tabLinks[0].classList.add("active");
             if (tabContents[0]) tabContents[0].classList.add("active");
+            setTimeout(() => centerActiveTab(tabLinks[0]), 100);
         }
     }
 

@@ -22,35 +22,49 @@ $pageTitle = "Administration — Mutuka.com";
 require_once __DIR__ . '/../includes/header.php';
 ?>
 
-<section class="section" style="padding-top: var(--space-5);">
-    <div style="margin-bottom: var(--space-5);">
+<section class="section" style="padding-top: var(--space-4);">
+    <div style="margin-bottom: var(--space-4);">
         <p class="eyebrow">Administration Générale</p>
-        <h1>Tableau de bord administrateur</h1>
-        <p>Vue d'ensemble de la plateforme et des données enregistrées.</p>
+        <h1 style="font-size: 1.8rem; margin-bottom: 4px;">Tableau de bord administrateur</h1>
+        <p style="color: var(--muted); margin: 0;">Vue d'ensemble de la plateforme et des données enregistrées.</p>
     </div>
 
-    <div class="stat-cards-grid">
+    <div class="stat-cards-grid" style="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));">
         <div class="stat-card">
-            <div class="stat-number"><?php echo $totalUsers; ?></div>
-            <div class="stat-label">Utilisateurs enregistrés</div>
+            <div class="stat-icon-box">👥</div>
+            <div class="stat-info">
+                <div class="stat-number"><?php echo $totalUsers; ?></div>
+                <div class="stat-label">Utilisateurs inscrits</div>
+            </div>
         </div>
         <div class="stat-card">
-            <div class="stat-number"><?php echo $totalVehicles; ?></div>
-            <div class="stat-label">Véhicules répertoriés</div>
+            <div class="stat-icon-box">🚗</div>
+            <div class="stat-info">
+                <div class="stat-number"><?php echo $totalVehicles; ?></div>
+                <div class="stat-label">Véhicules répertoriés</div>
+            </div>
         </div>
         <div class="stat-card">
-            <div class="stat-number"><?php echo $totalPurchases; ?></div>
-            <div class="stat-label">Demandes d'achat</div>
+            <div class="stat-icon-box">💳</div>
+            <div class="stat-info">
+                <div class="stat-number"><?php echo $totalPurchases; ?></div>
+                <div class="stat-label">Demandes d'achat</div>
+            </div>
         </div>
         <div class="stat-card">
-            <div class="stat-number"><?php echo $totalRentals; ?></div>
-            <div class="stat-label">Réservations de location</div>
+            <div class="stat-icon-box">📅</div>
+            <div class="stat-info">
+                <div class="stat-number"><?php echo $totalRentals; ?></div>
+                <div class="stat-label">Réservations location</div>
+            </div>
         </div>
     </div>
 
-    <div style="background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: var(--space-5); margin-top: var(--space-5);">
-        <h3 style="margin-bottom: var(--space-4);">Derniers membres inscrits</h3>
-        <div class="data-table-wrap">
+    <div style="background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: var(--space-4); margin-top: var(--space-4);">
+        <h3 style="margin-bottom: var(--space-3); font-size: 1.15rem;">Derniers membres inscrits</h3>
+        
+        <!-- Table Desktop -->
+        <div class="desktop-table-view data-table-wrap">
             <table class="data-table">
                 <thead>
                     <tr>
@@ -75,6 +89,40 @@ require_once __DIR__ . '/../includes/header.php';
                     <?php endforeach; ?>
                 </tbody>
             </table>
+        </div>
+
+        <!-- Cartes Mobiles -->
+        <div class="mobile-cards-view">
+            <?php foreach ($latestUsers as $u): ?>
+                <div class="mobile-data-card">
+                    <div class="mobile-card-top">
+                        <h4 class="mobile-card-veh-title"><?php echo e($u['prenom']); ?> <?php echo e($u['nom']); ?></h4>
+                        <span class="spec-pill"><?php echo e($u['role']); ?></span>
+                    </div>
+                    <div class="mobile-card-details-grid">
+                        <div class="mobile-card-col">
+                            <span class="mobile-card-label">Email</span>
+                            <span class="mobile-card-val" style="word-break: break-all;"><?php echo e($u['email']); ?></span>
+                        </div>
+                        <div class="mobile-card-col">
+                            <span class="mobile-card-label">Ville</span>
+                            <span class="mobile-card-val">📍 <?php echo e($u['ville']); ?></span>
+                        </div>
+                    </div>
+                    <div class="mobile-contact-row">
+                        <div class="mobile-contact-info">
+                            <span class="mobile-card-label">Téléphone</span>
+                            <span class="mobile-contact-phone"><?php echo e($u['telephone']); ?></span>
+                        </div>
+                        <a href="tel:<?php echo e($u['telephone']); ?>" class="mobile-call-btn">
+                            <span>📞 Appeler</span>
+                        </a>
+                    </div>
+                    <div style="font-size: 0.78rem; color: var(--muted); text-align: right;">
+                        Inscrit le <?php echo formatDateFR($u['created_at']); ?>
+                    </div>
+                </div>
+            <?php endforeach; ?>
         </div>
     </div>
 </section>
