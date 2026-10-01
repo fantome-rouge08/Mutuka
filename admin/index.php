@@ -106,7 +106,7 @@ require_once __DIR__ . '/../includes/header.php';
                         </div>
                         <div class="mobile-card-col">
                             <span class="mobile-card-label">Ville</span>
-                            <span class="mobile-card-val">📍 <?php echo e($u['ville']); ?></span>
+                            <span class="mobile-card-val"> <?php echo e($u['ville']); ?></span>
                         </div>
                     </div>
                     <div class="mobile-contact-row">
@@ -115,7 +115,7 @@ require_once __DIR__ . '/../includes/header.php';
                             <span class="mobile-contact-phone"><?php echo e($u['telephone']); ?></span>
                         </div>
                         <a href="tel:<?php echo e($u['telephone']); ?>" class="mobile-call-btn">
-                            <span>📞 Appeler</span>
+                            <span> Appeler</span>
                         </a>
                     </div>
                     <div style="font-size: 0.78rem; color: var(--muted); text-align: right;">

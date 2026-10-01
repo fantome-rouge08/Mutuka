@@ -47,13 +47,13 @@ require_once __DIR__ . '/includes/header.php';
                     <option value="<?php echo url('vente.php'); ?>">Vente</option>
                     <option value="<?php echo url('location.php'); ?>">Location</option>
                 </select>
-                <input type="text" name="q" placeholder="Marque, modèle..." />
+                <input type="text" name="q" placeholder="Marque, modèle..." width="100%" >
                 <button type="submit" class="btn btn-dark">Rechercher</button>
             </form>
         </div>
 
         <div class="hero-visual" aria-hidden="true" style="background: transparent !important; box-shadow: none !important; padding: 0 !important;">
-            <span class="hero-badge-overlay">Certifié Mutuka</span>
+            <span class="hero-badge-overlay">Mutuka.com</span>
             <img src="<?php echo url('assets/logo-mutuka.jpg'); ?>" alt="Logo Mutuka" class="hero-logo-img" style="max-width: 100%; max-height: 320px; width: 100%; height: auto; object-fit: cover; border-radius: var(--radius-lg);" />
         </div>
     </div>

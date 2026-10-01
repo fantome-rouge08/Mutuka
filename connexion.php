@@ -26,6 +26,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $user = $stmt->fetch();
 
         if ($user && password_verify($password, $user['password'])) {
+            // Vérifier si l'email est vérifié
+            // if ((int)$user['email_verified'] !== 1) {
+            //     // Renvoi OTP si expiré ou absent
+            //     if (!$user['otp_expires_at'] || strtotime($user['otp_expires_at']) < time()) {
+            //         $otp = generateOtp();
+            //         storeOtp($pdo, $user['id'], $otp);
+            //         sendOtpEmail($user['email'], $user['prenom'], $otp);
+            //         $_SESSION['otp_last_sent'] = time();
+            //     }
+            //     $_SESSION['otp_pending_email'] = $user['email'];
+            //     header('Location: ' . url("verifier.php?email=" . urlencode($user['email']) . "&login=1"));
+            //     exit;
+            // }
+
             // Création de la session sécurisée
             $_SESSION['user'] = [
                 'id' => $user['id'],

@@ -159,7 +159,7 @@ require_once __DIR__ . '/../includes/header.php';
     <div class="dash-welcome-bar">
         <div>
             <h1 class="dash-welcome-title">Mon Compte</h1>
-            <p class="dash-welcome-sub">Bonjour <strong><?php echo e($currentUser['prenom']); ?> <?php echo e($currentUser['nom']); ?></strong> • 📍 <?php echo e($currentUser['ville'] ?? 'Kinshasa'); ?></p>
+            <p class="dash-welcome-sub">Bonjour <strong><?php echo e($currentUser['prenom']); ?> <?php echo e($currentUser['nom']); ?></strong> •  <?php echo e($currentUser['ville'] ?? 'Kinshasa'); ?></p>
         </div>
         <div class="dash-welcome-actions">
             <a href="<?php echo url('publier.php'); ?>" class="btn btn-accent btn-sm">
@@ -188,7 +188,7 @@ require_once __DIR__ . '/../includes/header.php';
                 <h3 style="margin-bottom: 2px; font-size: 1.05rem;"><?php echo e($currentUser['prenom']); ?> <?php echo e($currentUser['nom']); ?></h3>
                 <span style="font-size: 0.8rem; color: var(--muted);"><?php echo e($currentUser['email']); ?></span>
                 <div style="margin-top: 8px;">
-                    <span class="spec-pill" style="background: var(--accent-bg); color: var(--accent-dark);">📍 <?php echo e($currentUser['ville'] ?? 'Kinshasa'); ?></span>
+                    <span class="spec-pill" style="background: var(--accent-bg); color: var(--accent-dark);"> <?php echo e($currentUser['ville'] ?? 'Kinshasa'); ?></span>
                 </div>
             </div>
 
@@ -266,24 +266,24 @@ require_once __DIR__ . '/../includes/header.php';
                     <p style="color: var(--muted); font-size: 0.95rem; margin: 0;">Bienvenue sur votre tableau de bord Mutuka.com.</p>
                 </div>
 
-                <!-- Grille de statistiques moderne (3 KPIs) -->
-                <div class="stat-cards-grid">
+                <!-- Grille de statistiques -->
+                <div class="stats-grid">
                     <div class="stat-card">
-                        <div class="stat-icon-box">🚗</div>
+                        <div class="stat-icon">🚗</div>
                         <div class="stat-info">
                             <div class="stat-number"><?php echo count($myVehicles); ?></div>
                             <div class="stat-label">Véhicules publiés</div>
                         </div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-icon-box">💳</div>
+                        <div class="stat-icon">💳</div>
                         <div class="stat-info">
                             <div class="stat-number"><?php echo count($myPurchases) + count($myRentals); ?></div>
                             <div class="stat-label">Opérations effectuées</div>
                         </div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-icon-box">📥</div>
+                        <div class="stat-icon">📥</div>
                         <div class="stat-info">
                             <div class="stat-number"><?php echo count($receivedBuys) + count($receivedRentals); ?></div>
                             <div class="stat-label">Demandes clients</div>
@@ -292,37 +292,34 @@ require_once __DIR__ . '/../includes/header.php';
                 </div>
 
                 <!-- Tuiles d'accès rapide -->
-                <div style="background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: var(--space-4);">
-                    <h3 style="font-size: 1.1rem; margin-bottom: var(--space-2);">Accès rapide</h3>
-                    <div class="quick-actions-grid">
-                        <a href="<?php echo url('publier.php'); ?>" class="quick-action-card">
-                            <div class="quick-action-icon" style="color: var(--accent);">➕</div>
-                            <div class="quick-action-body">
-                                <h4>Publier une annonce</h4>
-                                <p>Vente ou location de votre véhicule</p>
-                            </div>
-                        </a>
-                        <a href="<?php echo url('vente.php'); ?>" class="quick-action-card">
-                            <div class="quick-action-icon">🏷️</div>
-                            <div class="quick-action-body">
-                                <h4>Véhicules en vente</h4>
-                                <p>Parcourir les autos disponibles</p>
-                            </div>
-                        </a>
-                        <a href="<?php echo url('location.php'); ?>" class="quick-action-card">
-                            <div class="quick-action-icon">🔑</div>
-                            <div class="quick-action-body">
-                                <h4>Véhicules en location</h4>
-                                <p>Trouver une voiture à louer</p>
-                            </div>
-                        </a>
-                    </div>
+                <div class="quick-grid">
+                    <a href="<?php echo url('publier.php'); ?>" class="quick-card">
+                        <div class="quick-icon">➕</div>
+                        <div class="quick-body">
+                            <h4>Publier une annonce</h4>
+                            <p>Vente ou location de votre véhicule</p>
+                        </div>
+                    </a>
+                    <a href="<?php echo url('vente.php'); ?>" class="quick-card">
+                        <div class="quick-icon">🏷️</div>
+                        <div class="quick-body">
+                            <h4>Véhicules en vente</h4>
+                            <p>Parcourir les autos disponibles</p>
+                        </div>
+                    </a>
+                    <a href="<?php echo url('location.php'); ?>" class="quick-card">
+                        <div class="quick-icon">🔑</div>
+                        <div class="quick-body">
+                            <h4>Véhicules en location</h4>
+                            <p>Trouver une voiture à louer</p>
+                        </div>
+                    </a>
                 </div>
             </div>
 
             <!-- TAB 2 : MES ANNONCES -->
             <div class="tab-content" id="tab-annonces">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-4); flex-wrap: wrap; gap: var(--space-2);">
+                <div style="display: block; justify-content: space-between; align-items: center; margin-bottom: var(--space-4); flex-wrap: none; gap: var(--space-2);">
                     <div>
                         <h2 style="font-size: 1.6rem; margin-bottom: 2px;">Mes annonces publiées</h2>
                         <p style="margin: 0; color: var(--muted); font-size: 0.92rem;">Gérez vos annonces, leur statut et leur visibilité.</p>
@@ -331,44 +328,41 @@ require_once __DIR__ . '/../includes/header.php';
                 </div>
 
                 <?php if (empty($myVehicles)): ?>
-                    <div style="text-align: center; padding: var(--space-6); background: var(--surface); border-radius: var(--radius); border: 1px dashed var(--border);">
+                    <div style="text-align: center; padding: var(--space-6); background: var(--surface); border-radius: var(--radius); border: 1px dashed var(--border);  " class="dsh">
                         <p style="margin-bottom: var(--space-3); color: var(--muted);">Vous n'avez pas encore publié de véhicule sur Mutuka.</p>
                         <a href="<?php echo url('publier.php'); ?>" class="btn btn-accent">+ Publier votre premier véhicule</a>
                     </div>
                 <?php else: ?>
-                    <div style="display: flex; flex-direction: column; gap: var(--space-3);">
+                    <div class="data-cards">
                         <?php foreach ($myVehicles as $v): ?>
-                            <div class="dash-vehicle-card">
-                                <!-- En-tête mobile (visuel + titre + prix) -->
-                                <div class="dash-vehicle-top-mobile">
-                                    <div class="dash-vehicle-media">
-                                        <img src="<?php echo getVehiclePhoto($v['photo_principale'], $v['type_vehicule']); ?>" alt="<?php echo e($v['titre']); ?>" loading="lazy" />
+                            <article class="vehicle-card">
+                                <!-- Media + Body -->
+                                <div class="vehicle-media">
+                                    <img src="<?php echo getVehiclePhoto($v['photo_principale'], $v['type_vehicule']); ?>" alt="<?php echo e($v['titre']); ?>" loading="lazy" />
+                                </div>
+                                <div class="vehicle-body">
+                                    <div class="vehicle-header">
+                                        <span class="vehicle-badge badge-<?php echo e($v['type_transaction']); ?>" style="position: static; font-size: 0.7rem; padding: 2px 8px;">
+                                            <?php echo ucfirst(e($v['type_transaction'])); ?>
+                                        </span>
+                                        <h4 class="vehicle-title"><?php echo e($v['titre']); ?></h4>
                                     </div>
-
-                                    <div class="dash-vehicle-body">
-                                        <div class="dash-vehicle-header-row">
-                                            <span class="badge-tag badge-<?php echo e($v['type_transaction']); ?>" style="position: static; font-size: 0.68rem; padding: 2px 8px;">
-                                                <?php echo ucfirst(e($v['type_transaction'])); ?>
-                                            </span>
-                                            <h4 class="dash-vehicle-title"><?php echo e($v['titre']); ?></h4>
-                                        </div>
-                                        <div class="dash-vehicle-price">
-                                            <?php echo formatPrice((float)$v['prix']); ?><?php echo ($v['type_transaction'] === 'location') ? '<span style="font-size: 0.8rem; font-weight: normal; color: var(--muted);">/jour</span>' : ''; ?>
-                                        </div>
-                                        <div class="dash-vehicle-meta">
-                                            <span>📍 <?php echo e($v['ville']); ?></span>
-                                            <span>👁️ <?php echo (int)$v['vues']; ?> vue(s)</span>
-                                        </div>
+                                    <div class="vehicle-price">
+                                        <?php echo formatPrice((float)$v['prix']); ?><?php echo ($v['type_transaction'] === 'location') ? '<span style="font-size: 0.8rem; font-weight: normal; color: var(--muted);">/jour</span>' : ''; ?>
+                                    </div>
+                                    <div class="vehicle-meta">
+                                        <span><?php echo e($v['ville']); ?></span>
+                                        <span><?php echo (int)$v['vues']; ?> vue(s)</span>
                                     </div>
                                 </div>
 
-                                <!-- Sélecteur de statut rapide -->
-                                <div class="dash-vehicle-status-form">
-                                    <span class="dash-status-label">Statut de l'annonce :</span>
+                                <!-- Status selector -->
+                                <div class="vehicle-status">
+                                    <span class="status-label">Statut de l'annonce :</span>
                                     <form action="<?php echo url('compte/index.php'); ?>" method="post">
                                         <input type="hidden" name="action" value="update_vehicle_status" />
                                         <input type="hidden" name="vehicle_id" value="<?php echo $v['id']; ?>" />
-                                        <select name="statut" class="dash-status-select" onchange="this.form.submit()" aria-label="Modifier le statut">
+                                        <select name="statut" class="status-select" onchange="this.form.submit()" aria-label="Modifier le statut">
                                             <option value="disponible" <?php echo ($v['statut'] === 'disponible') ? 'selected' : ''; ?>>🟢 Disponible</option>
                                             <option value="reserve" <?php echo ($v['statut'] === 'reserve') ? 'selected' : ''; ?>>🟡 Réservé</option>
                                             <option value="vendu" <?php echo ($v['statut'] === 'vendu') ? 'selected' : ''; ?>>🔴 Vendu</option>
@@ -377,8 +371,8 @@ require_once __DIR__ . '/../includes/header.php';
                                     </form>
                                 </div>
 
-                                <!-- Boutons d'action tactiles -->
-                                <div class="dash-vehicle-actions">
+                                <!-- Actions -->
+                                <div class="vehicle-actions">
                                     <a href="<?php echo url("modifier.php?id={$v['id']}"); ?>" class="btn btn-accent btn-sm" title="Modifier cette annonce">
                                         ✏️ Modifier
                                     </a>
@@ -393,7 +387,7 @@ require_once __DIR__ . '/../includes/header.php';
                                         </button>
                                     </form>
                                 </div>
-                            </div>
+                            </article>
                         <?php endforeach; ?>
                     </div>
                 <?php endif; ?>
@@ -407,7 +401,7 @@ require_once __DIR__ . '/../includes/header.php';
                 </div>
 
                 <?php if (empty($myPurchases)): ?>
-                    <div style="text-align: center; padding: var(--space-6); background: var(--surface); border-radius: var(--radius); border: 1px dashed var(--border);">
+                    <div style="text-align: center; padding: var(--space-6); background: var(--surface); border-radius: var(--radius); border: 1px dashed var(--border); " class="dsh">
                         <p style="margin-bottom: var(--space-3); color: var(--muted);">Vous n'avez formulé aucune demande d'achat pour le moment.</p>
                         <a href="<?php echo url('vente.php'); ?>" class="btn btn-accent">Découvrir les véhicules en vente</a>
                     </div>
@@ -475,12 +469,12 @@ require_once __DIR__ . '/../includes/header.php';
                                         <span class="mobile-contact-phone"><?php echo e($p['vendeur_tel']); ?></span>
                                     </div>
                                     <a href="tel:<?php echo e($p['vendeur_tel']); ?>" class="mobile-call-btn" title="Appeler le vendeur">
-                                        <span>📞 Appeler</span>
+                                        <span> Appeler</span>
                                     </a>
                                 </div>
                                 <div class="mobile-card-footer">
                                     <a href="<?php echo url("details.php?id={$p['vehicle_id']}"); ?>" class="btn btn-outline btn-sm" style="width: 100%; justify-content: center;">
-                                        👁️ Voir la fiche du véhicule
+                                        Voir la fiche du véhicule
                                     </a>
                                 </div>
                             </div>
@@ -497,7 +491,7 @@ require_once __DIR__ . '/../includes/header.php';
                 </div>
 
                 <?php if (empty($myRentals)): ?>
-                    <div style="text-align: center; padding: var(--space-6); background: var(--surface); border-radius: var(--radius); border: 1px dashed var(--border);">
+                    <div style="text-align: center; padding: var(--space-6); background: var(--surface); border-radius: var(--radius); border: 1px dashed var(--border); " class="dsh">
                         <p style="margin-bottom: var(--space-3); color: var(--muted);">Aucune location réservée pour le moment.</p>
                         <a href="<?php echo url('location.php'); ?>" class="btn btn-accent">Parcourir les locations disponibles</a>
                     </div>
@@ -559,17 +553,17 @@ require_once __DIR__ . '/../includes/header.php';
                                 </div>
                                 <div class="mobile-contact-row">
                                     <div class="mobile-contact-info">
-                                        <span class="mobile-card-label">Bailleur / Propriétaire</span>
+                                        <span class="mobile-card-label">Propriétaire</span>
                                         <span class="mobile-contact-name"><?php echo e($r['owner_prenom']); ?> <?php echo e($r['owner_nom']); ?></span>
                                         <span class="mobile-contact-phone"><?php echo e($r['owner_tel']); ?></span>
                                     </div>
                                     <a href="tel:<?php echo e($r['owner_tel']); ?>" class="mobile-call-btn" title="Appeler le propriétaire">
-                                        <span>📞 Appeler</span>
+                                        <span>Appeler</span>
                                     </a>
                                 </div>
                                 <div class="mobile-card-footer">
                                     <a href="<?php echo url("details.php?id={$r['vehicle_id']}"); ?>" class="btn btn-outline btn-sm" style="width: 100%; justify-content: center;">
-                                        👁️ Voir le véhicule loué
+                                        Voir le véhicule loué
                                     </a>
                                 </div>
                             </div>
@@ -587,7 +581,7 @@ require_once __DIR__ . '/../includes/header.php';
 
                 <h3 style="margin-top: var(--space-4); font-size: 1.15rem;">Demandes d'achat reçues</h3>
                 <?php if (empty($receivedBuys)): ?>
-                    <p style="font-size: 0.9rem; color: var(--muted); background: var(--surface); padding: var(--space-4); border-radius: var(--radius); border: 1px solid var(--border);">Aucune demande d'achat reçue pour le moment.</p>
+                    <p style="font-size: 0.9rem; color: var(--muted); background: var(--surface); padding: var(--space-4); border-radius: var(--radius); border: 1px solid var(--border);  " class="paras">Aucune demande d'achat reçue pour le moment.</p>
                 <?php else: ?>
                     <!-- Desktop Table -->
                     <div class="desktop-table-view data-table-wrap" style="margin-bottom: var(--space-5);">
@@ -645,7 +639,7 @@ require_once __DIR__ . '/../includes/header.php';
                                         <span class="mobile-contact-phone"><?php echo e($rb['telephone_contact']); ?></span>
                                     </div>
                                     <a href="tel:<?php echo e($rb['telephone_contact']); ?>" class="mobile-call-btn">
-                                        <span>📞 Appeler</span>
+                                        <span>Appeler</span>
                                     </a>
                                 </div>
                                 <?php if (!empty($rb['message'])): ?>
@@ -675,7 +669,7 @@ require_once __DIR__ . '/../includes/header.php';
 
                 <h3 style="margin-top: var(--space-5); font-size: 1.15rem;">Demandes de location reçues</h3>
                 <?php if (empty($receivedRentals)): ?>
-                    <p style="font-size: 0.9rem; color: var(--muted); background: var(--surface); padding: var(--space-4); border-radius: var(--radius); border: 1px solid var(--border);">Aucune demande de location reçue pour le moment.</p>
+                    <p style="font-size: 0.9rem; color: var(--muted); background: var(--surface); padding: var(--space-4); border-radius: var(--radius); border: 1px solid var(--border); " class="paras">Aucune demande de location reçue pour le moment.</p>
                 <?php else: ?>
                     <!-- Desktop Table -->
                     <div class="desktop-table-view data-table-wrap">
@@ -769,9 +763,9 @@ require_once __DIR__ . '/../includes/header.php';
 
             <!-- TAB 6 : PROFIL -->
             <div class="tab-content" id="tab-profil">
-                <div style="margin-bottom: var(--space-4);">
+                <div style="margin-bottom: var(--space-4); ">
                     <h2 style="font-size: 1.6rem; margin-bottom: 2px;">Modifier mon profil</h2>
-                    <p style="margin: 0; color: var(--muted); font-size: 0.92rem;">Mettez à jour vos coordonnées de contact et votre mot de passe.</p>
+                    <p style="margin: 0; color: var(--muted); font-size: 0.92rem;" class="paras">Mettez à jour vos coordonnées de contact et votre mot de passe.</p>
                 </div>
 
                 <div class="form-card" style="margin: 0; max-width: 100%;">

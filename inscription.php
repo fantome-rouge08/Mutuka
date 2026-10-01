@@ -75,24 +75,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $userId = $pdo->lastInsertId();
 
-        // Connecter l'utilisateur automatiquement
-        $_SESSION['user'] = [
-            'id' => $userId,
-            'nom' => $formData['nom'],
-            'prenom' => $formData['prenom'],
-            'email' => $formData['email'],
-            'telephone' => $formData['telephone'],
-            'whatsapp' => $whatsappNumber,
-            'ville' => $formData['ville'],
-            'role' => 'user'
-        ];
-
-        setFlash('success', "Bienvenue sur Mutuka, {$formData['prenom']} ! Votre compte a été créé avec succès.");
+        // // Générer et envoyer OTP
+        // $otp = generateOtp();
+        // storeOtp($pdo, $userId, $otp);
+        // $emailSent = sendOtpEmail($formData['email'], $formData['prenom'], $otp);
         
-        $redirect = $_SESSION['redirect_after_login'] ?? url('compte/index.php');
-        unset($_SESSION['redirect_after_login']);
-        header('Location: ' . $redirect);
-        exit;
+        // // Stocker timestamp pour cooldown resend
+        // $_SESSION['otp_last_sent'] = time();
+        // $_SESSION['otp_pending_email'] = $formData['email'];
+
+        // if ($emailSent) {
+        //     setFlash('success', "Un code de vérification à 6 chiffres a été envoyé à <strong>" . e($formData['email']) . "</strong>. Vérifiez votre boîte de réception (et vos spams).");
+        // } else {
+        //     setFlash('warning', "Votre compte a été créé mais l'envoi de l'email a échoué. Utilisez le bouton \"Renvoyer le code\" sur la page de vérification.");
+        // }
+        
+        // header('Location: ' . url("verifier.php?email=" . urlencode($formData['email'])));
+        // exit;
     }
 }
 

@@ -10,6 +10,11 @@ CREATE TABLE IF NOT EXISTS `users` (
     `ville` VARCHAR(100) DEFAULT 'Kinshasa',
     `avatar` VARCHAR(255) DEFAULT NULL,
     `role` ENUM('user', 'admin') DEFAULT 'user',
+    `email_verified` TINYINT(1) DEFAULT 0,
+    `otp_code` VARCHAR(6) NULL,
+    `otp_expires_at` DATETIME NULL,
+    `otp_attempts` TINYINT(1) DEFAULT 0,
+    `otp_locked_until` DATETIME NULL,
     `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -103,10 +108,10 @@ CREATE TABLE IF NOT EXISTS `favorites` (
 -- =============================================
 
 -- Mot de passe par défaut : Pass1234!
-INSERT INTO `users` (`id`, `nom`, `prenom`, `email`, `telephone`, `whatsapp`, `password`, `ville`, `role`) VALUES
-(1, 'Mutombo', 'Patrick', 'patrick.mutombo@mutuka.com', '+243810000001', '+243810000001', '$2y$10$w8B7o5o0uE352J0L.t6KpeM5j2P/q/Y0G3k8w4z6GgD7R1z6P9uKe', 'Kinshasa (Gombe)', 'admin'),
-(2, 'Kabila', 'Sarah', 'sarah.kabila@mutuka.com', '+243890000002', '+243890000002', '$2y$10$w8B7o5o0uE352J0L.t6KpeM5j2P/q/Y0G3k8w4z6GgD7R1z6P9uKe', 'Lubumbashi', 'user'),
-(3, 'Tshisekedi', 'Alain', 'alain.t@mutuka.com', '+243820000003', '+243820000003', '$2y$10$w8B7o5o0uE352J0L.t6KpeM5j2P/q/Y0G3k8w4z6GgD7R1z6P9uKe', 'Goma', 'user')
+INSERT INTO `users` (`id`, `nom`, `prenom`, `email`, `telephone`, `whatsapp`, `password`, `ville`, `role`, `email_verified`) VALUES
+(1, 'Mutombo', 'Patrick', 'patrick.mutombo@mutuka.com', '+243810000001', '+243810000001', '$2y$10$w8B7o5o0uE352J0L.t6KpeM5j2P/q/Y0G3k8w4z6GgD7R1z6P9uKe', 'Kinshasa (Gombe)', 'admin', 1),
+(2, 'Kabila', 'Sarah', 'sarah.kabila@mutuka.com', '+243890000002', '+243890000002', '$2y$10$w8B7o5o0uE352J0L.t6KpeM5j2P/q/Y0G3k8w4z6GgD7R1z6P9uKe', 'Lubumbashi', 'user', 1),
+(3, 'Tshisekedi', 'Alain', 'alain.t@mutuka.com', '+243820000003', '+243820000003', '$2y$10$w8B7o5o0uE352J0L.t6KpeM5j2P/q/Y0G3k8w4z6GgD7R1z6P9uKe', 'Goma', 'user', 1)
 ON DUPLICATE KEY UPDATE `id` = `id`;
 
 -- Véhicules de démonstration

@@ -9,7 +9,7 @@ if (!defined('DB_HOST')) {
         // Configuration Locale (WampServer / XAMPP)
         define('DB_HOST', 'localhost');
         define('DB_PORT', '3306');
-        define('DB_NAME', 'mutuka');
+        define('DB_NAME', 'mutuka_db');
         define('DB_USER', 'root');
         define('DB_PASS', 'michel');
     } else {
@@ -21,6 +21,18 @@ if (!defined('DB_HOST')) {
         define('DB_PASS', 'mutuka64');
     }
 }
+
+// // --- SMTP / Email (Gmail - production) ---
+// define('SMTP_HOST', 'smtp.gmail.com');
+// define('SMTP_PORT', 587);
+// define('SMTP_USER', 'michelkipkip7@gmail.com');           // Votre vraie adresse Gmail
+// define('SMTP_PASS', 'aivfzryihzldrwwp'); // Mot de passe d'application Gmail (16 caractères)
+// define('SMTP_FROM', 'noreply@gmail.com');
+// define('SMTP_FROM_NAME', 'Mutuka.com');
+// define('OTP_TTL_MINUTES', 15);
+// define('OTP_RESEND_COOLDOWN', 60);
+// define('OTP_MAX_ATTEMPTS', 5);
+// define('OTP_LOCKOUT_MINUTES', 15);
 
 /**
  * Récupère ou initialise la connexion PDO
