@@ -1287,7 +1287,7 @@ main#dashboard-content {
 
 /* Fiches Cartes Mobiles */
 .mobile-data-card {
-  width: 50%;
+  width: 100%;
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius);
@@ -1403,6 +1403,8 @@ main#dashboard-content {
   min-width: 0;
 }
 
+
+
 /* =====================================================================
    RESPONSIVE MOBILE — compte/index.php (<= 860px)
    ===================================================================== */
@@ -1410,39 +1412,6 @@ main#dashboard-content {
 /* =====================================================================
    EXTRA SMALL (<= 480px) — très petits écrans
    ===================================================================== */
-
-  /* Compte page vehicle cards at 480px */
-  .vehicle-card { display: flex; flex-direction: column; gap: 10px; padding: 12px; }
-  .vehicle-card .vehicle-media { width: 100%; height: 400px; max-width: 100%; border-radius: 8px; overflow: hidden; }
-  .vehicle-card .vehicle-media img { width: 100%; height: 100%; object-fit: cover; }
-  .vehicle-card .vehicle-body { display: flex; flex-direction: column; gap: 6px; margin-right: 150px; margin-top: 15px;}
-  .vehicle-card .vehicle-title { font-size: 0.9rem; line-height: 1.3; }
-  .vehicle-card .vehicle-price { font-size: 0.95rem; font-weight: 700; }
-  .vehicle-card .vehicle-meta { font-size: 0.75rem; gap: 8px; }
-  .vehicle-card .vehicle-status { width: 100%; }
-  .vehicle-card .status-label { font-size: 0.75rem; }
-  .vehicle-card .status-select { font-size: 16px; padding: 8px 10px; width: 100%; }
-  .vehicle-card .vehicle-actions { display: grid; grid-template-columns: 1fr; gap: 8px; width: 100%; }
-  .vehicle-card .vehicle-actions .btn { width: 100%; min-height: 44px; font-size: 0.85rem; justify-content: center; }
-
-    /* Backup: forcer masquage tableaux desktop + cartes mobile visibles */
-    .desktop-table-view { display: none !important; }
-    .mobile-cards-view { display: flex !important; flex-direction: column; gap: 10px; }
-
-    /* Backup: vehicle actions empilées (double sélecteur pour spécificité) */
-    .vehicle-card .vehicle-actions,
-    article.vehicle-card > .vehicle-actions {
-      display: grid !important;
-      grid-template-columns: 1fr !important;
-      gap: 8px !important;
-    }
-    .vehicle-card .vehicle-actions .btn,
-    article.vehicle-card > .vehicle-actions .btn {
-      width: 100% !important;
-      min-height: 44px !important;
-    }
-    .vehicle-card .vehicle-actions form,
-    article.vehicle-card > .vehicle-actions form { display: block !important; }
 
   /* Prevent iOS zoom on select/input focus */
   select, input[type="text"], input[type="email"], input[type="tel"], input[type="password"], textarea { font-size: 16px; }
@@ -1653,7 +1622,7 @@ main#dashboard-content {
 /* Stats grid for compte page (HTML uses .stats-grid, not .stat-cards-grid) */
 
 .stat-card {
-  width: 40%;
+  width: 100%;
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--card-radius);
@@ -1675,7 +1644,7 @@ main#dashboard-content {
 }
 
 .quick-card {
-  width: 40%;
+  width: 100%;
   background: var(--surface-alt);
   border: 1px solid var(--border);
   border-radius: var(--card-radius);
@@ -1688,30 +1657,36 @@ main#dashboard-content {
 .quick-body h4 { font-size: 0.9rem; margin: 0 0 2px; ;}
 .quick-body p { font-size: 0.78rem; color: var(--muted); margin: 0; }
 
-/* === Véhicule card unifié : Desktop table + Mobile card === */
+/* === Véhicule card unifié : Desktop uniquement (mobile géré en 768px / 480px) === */
 .vehicle-card {
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--card-radius);
   padding: 14px;
   display: grid;
-  grid-template-columns: var(--img-w) minmax(0, 1fr) auto auto;
-  gap: 14px;
-  align-items: center;
+  grid-template-columns: 220px minmax(0, 1fr);
+  grid-template-areas:
+    "media body"
+    "media status"
+    "media actions";
+  gap: 10px 16px;
+  align-items: start;
   transition: box-shadow 0.15s ease;
-  --img-w: 100px;
-  --img-h: 75px;
+  width: 800px;
+  height: 400px;
 }
 .vehicle-card:hover { box-shadow: var(--shadow-md); }
 
 .vehicle-media {
-  width: var(--img-w); height: var(--img-h);
+  grid-area: media;
+  width: 350px;
+  height: 100%;
+  aspect-ratio: 4 / 3;
   border-radius: 8px; overflow: hidden; background: #1c1f24;
-  grid-row: 1 / -1;
 }
 
 .vehicle-media img { width: 100%; height: 100%; object-fit: cover; }
-.vehicle-body { min-width: 0; }
+.vehicle-body { min-width: 0; grid-area: body; margin-left: 190px; }
 
 .vehicle-header { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 6px; }
 .vehicle-badge {
@@ -1727,8 +1702,13 @@ main#dashboard-content {
 
 /* Status selector */
 .vehicle-status {
+  grid-area: status;
   display: flex; align-items: center; gap: 8px;
   background: var(--surface-alt); border: 1px solid var(--border); border-radius: 8px; padding: 8px 12px;
+  justify-self: start;
+  max-width: 420px;
+  width: auto;
+  margin-left: 190px;
 }
 
 .status-label { font-size: 0.8rem; color: var(--muted); white-space: nowrap; }
@@ -1738,10 +1718,12 @@ main#dashboard-content {
 
 /* Actions */
 .vehicle-actions {
-  display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end;
+  grid-area: actions;
+  display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-start;
+  margin-left: 190px;
 }
 
-.vehicle-actions .btn { flex: 1; min-width: 0; min-height: var(--touch-target); padding: 8px 12px; font-size: 0.82rem; justify-content: center; }
+.vehicle-actions .btn { flex: 0 0 auto; min-height: var(--touch-target); padding: 8px 14px; font-size: 0.82rem; justify-content: center; }
 .vehicle-actions form { display: contents; }
 
 /* === Compte page: Vehicle actions styling === */
@@ -1847,6 +1829,7 @@ main#dashboard-content {
   .specs-table td { padding: 8px 4px; font-size: 0.88rem; }
 
   /* Formulaires */
+  #publisher{width: 100%;}
   .form-card { padding: 20px 16px; margin: 16px auto; width: 50%; }
   .form-card-auth { padding: 22px 16px; }
   .form-row { grid-template-columns: 1fr; gap: 0; }
@@ -1899,8 +1882,8 @@ main#dashboard-content {
 
   /* Compte : vehicules */
   .vehicles-grid { grid-template-columns: 1fr; gap: 16px; }
-  .vehicle-card, .dash-vehicle-card { display: flex; flex-direction: column; gap: 10px; padding: 12px; }
-  .vehicle-media, .dash-vehicle-media { width: 100%; height: 140px; max-width: 100%; border-radius: 8px; overflow: hidden; flex-shrink: 0; }
+  .vehicle-card, .dash-vehicle-card { display: flex; flex-direction: column; gap: 10px; padding: 12px; width: 65%;}
+  .vehicle-media, .dash-vehicle-media { width: 100%; height: 220px; max-width: 100%; border-radius: 8px; overflow: hidden; flex-shrink: 0; }
   .vehicle-media img, .dash-vehicle-media img { width: 100%; height: 100%; object-fit: cover; }
   .vehicle-body, .dash-vehicle-body { min-width: 0; }
   .vehicle-title, .dash-vehicle-title { font-size: 0.9rem; }
@@ -1939,7 +1922,7 @@ main#dashboard-content {
   .stats-grid, .stat-cards-grid { grid-template-columns: 1fr; gap: 8px; }
   .stat-card { flex-direction: row; align-items: center; }
 
-  .vehicle-media, .dash-vehicle-media { height: 120px; }
+  .vehicle-media, .dash-vehicle-media { height: 400px; }
   .vehicle-actions, .dash-vehicle-actions { grid-template-columns: 1fr; }
   .vehicle-actions .btn, .dash-vehicle-actions .btn { padding: 6px 10px; font-size: 0.76rem; }
   .vehicle-actions form, .dash-vehicle-actions form { grid-column: 1 / -1; }

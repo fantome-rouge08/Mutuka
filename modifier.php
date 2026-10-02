@@ -199,7 +199,7 @@ require_once __DIR__ . '/includes/header.php';
                 <h2 style="margin-top: 4px;">Modifier votre annonce</h2>
             </div>
             <a href="<?php echo url("details.php?id={$vehicleId}"); ?>" target="_blank" class="btn btn-outline btn-sm">
-                👁️ Voir la fiche actuelle
+                 Voir la fiche actuelle
             </a>
         </div>
 

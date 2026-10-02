@@ -335,7 +335,7 @@ require_once __DIR__ . '/../includes/header.php';
                 <?php else: ?>
                     <div class="data-cards">
                         <?php foreach ($myVehicles as $v): ?>
-                            <article class="vehicle-card">
+                            <article class="vehicle-card" \>
                                 <!-- Media + Body -->
                                 <div class="vehicle-media">
                                     <img src="<?php echo getVehiclePhoto($v['photo_principale'], $v['type_vehicule']); ?>" alt="<?php echo e($v['titre']); ?>" loading="lazy" />
@@ -688,7 +688,7 @@ require_once __DIR__ . '/../includes/header.php';
                                 <?php foreach ($receivedRentals as $rr): ?>
                                     <tr>
                                         <td><strong><?php echo e($rr['vehicule_titre']); ?></strong></td>
-                                        <td><?php echo e($rr['locataire_prenom']); ?> <?php echo e($rr['locataire_nom']); ?><br><small>📞 <?php echo e($rr['telephone_contact']); ?></small></td>
+                                        <td><?php echo e($rr['locataire_prenom']); ?> <?php echo e($rr['locataire_nom']); ?><br><small><?php echo e($rr['telephone_contact']); ?></small></td>
                                         <td>Du <?php echo formatDateFR($rr['date_debut']); ?><br>au <?php echo formatDateFR($rr['date_fin']); ?> (<?php echo (int)$rr['nb_jours']; ?>j)</td>
                                         <td><strong><?php echo formatPrice((float)$rr['montant_total']); ?></strong></td>
                                         <td>
@@ -737,7 +737,7 @@ require_once __DIR__ . '/../includes/header.php';
                                         <span class="mobile-contact-phone"><?php echo e($rr['telephone_contact']); ?></span>
                                     </div>
                                     <a href="tel:<?php echo e($rr['telephone_contact']); ?>" class="mobile-call-btn">
-                                        <span>📞 Appeler</span>
+                                        <span> Appeler</span>
                                     </a>
                                 </div>
                                 <div class="mobile-card-footer">

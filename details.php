@@ -154,7 +154,7 @@ require_once __DIR__ . '/includes/header.php';
                         ● <?php echo ucfirst(e($vehicle['statut'])); ?>
                     </span>
                     <span style="font-size: 0.82rem; color: var(--muted); margin-left: auto;">
-                        👁️ <?php echo (int)$vehicle['vues']; ?> consultation(s)
+                        <?php echo (int)$vehicle['vues']; ?> consultation(s)
                     </span>
                 </div>
 
@@ -252,7 +252,7 @@ require_once __DIR__ . '/includes/header.php';
                             <?php echo e($vehicle['owner_prenom']); ?> <?php echo e($vehicle['owner_nom']); ?>
                         </div>
                         <div style="font-size: 0.82rem; color: var(--muted);">
-                            📍 <?php echo e($vehicle['owner_ville']); ?> • Membre certifié
+                            <?php echo e($vehicle['owner_ville']); ?> • Membre certifié
                         </div>
                     </div>
                 </div>
@@ -273,7 +273,7 @@ require_once __DIR__ . '/includes/header.php';
                 <!-- Bouton d'action sécurisé (Acheter ou Réserver) -->
                 <?php if ($isOwner): ?>
                     <div style="background: var(--surface-alt); padding: var(--space-4); border-radius: var(--radius-sm); text-align: center; font-size: 0.88rem; border: 1px solid var(--border);">
-                        <div style="margin-bottom: 8px;">👤 <strong>Vous êtes l'auteur de cette annonce.</strong></div>
+                        <div style="margin-bottom: 8px;"> <strong>Vous êtes l'auteur de cette annonce.</strong></div>
                         <div style="display: flex; gap: 8px; justify-content: center; flex-wrap: wrap;">
                             <a href="<?php echo url("modifier.php?id={$vehicle['id']}"); ?>" class="btn btn-accent btn-sm">✏️ Modifier l'annonce</a>
                             <a href="<?php echo url('compte/index.php#annonces'); ?>" class="btn btn-outline btn-sm">Mes annonces</a>
