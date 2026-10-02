@@ -107,7 +107,7 @@ $currentScript = basename($_SERVER['SCRIPT_NAME']);
         <a href="<?php echo url('location.php'); ?>" class="nav-link">Location de véhicules</a>
         
         <?php if ($isAuth): ?>
-            <a href="<?php echo url('compte/index.php'); ?>" class="nav-link font-bold">Mon ComptentUser['prenom']); ?>)</a>
+            <a href="<?php echo url('compte/index.php'); ?>" class="nav-link font-bold">Mon Compte</a>
             <a href="<?php echo url('deconnexion.php'); ?>" class="btn-logout" style="margin: 8px 0; align-self: flex-start;">
                 <svg class="logout-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>

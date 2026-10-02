@@ -123,7 +123,7 @@ require_once __DIR__ . '/includes/header.php';
 ?>
 
 <section class="section">
-    <div class="form-card" style="max-width: 800px;">
+    <div class="form-card" id="publisher">
         <div class="section-head" style="margin-bottom: var(--space-4);">
             <p class="eyebrow">Nouvelle Annonce</p>
             <h2>Mettre un véhicule en vente ou en location</h2>

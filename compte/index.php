@@ -374,16 +374,16 @@ require_once __DIR__ . '/../includes/header.php';
                                 <!-- Actions -->
                                 <div class="vehicle-actions">
                                     <a href="<?php echo url("modifier.php?id={$v['id']}"); ?>" class="btn btn-accent btn-sm" title="Modifier cette annonce">
-                                        ✏️ Modifier
+                                         Modifier
                                     </a>
                                     <a href="<?php echo url("details.php?id={$v['id']}"); ?>" class="btn btn-outline btn-sm" title="Consulter la fiche">
-                                        👁️ Voir
+                                         Voir
                                     </a>
                                     <form action="<?php echo url('compte/index.php'); ?>" method="post" onsubmit="return confirm('Confirmez-vous la suppression définitive de cette annonce ?');">
                                         <input type="hidden" name="action" value="delete_vehicle" />
                                         <input type="hidden" name="vehicle_id" value="<?php echo $v['id']; ?>" />
                                         <button type="submit" class="btn btn-danger-outline btn-sm" title="Supprimer">
-                                            🗑️ Supprimer
+                                            Supprimer
                                         </button>
                                     </form>
                                 </div>
@@ -576,7 +576,7 @@ require_once __DIR__ . '/../includes/header.php';
             <div class="tab-content" id="tab-demandes">
                 <div style="margin-bottom: var(--space-4);">
                     <h2 style="font-size: 1.6rem; margin-bottom: 2px;">Demandes clients reçues</h2>
-                    <p style="margin: 0; color: var(--muted); font-size: 0.92rem;">Validez ou gérez les propositions d'achat et réservations de vos véhicules.</p>
+                    <p style="margin: 0; color: var(--muted); font-size: 0.92rem; width:45%">Validez ou gérez les propositions d'achat et réservations de vos véhicules.</p>
                 </div>
 
                 <h3 style="margin-top: var(--space-4); font-size: 1.15rem;">Demandes d'achat reçues</h3>
